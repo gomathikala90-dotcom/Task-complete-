@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Mini Learning</title>
+<style>
+body{font-family:sans-serif;margin:0;background:#f4f4f4;text-align:center}
+.lesson{background:#ddd;padding:10px;margin:5px;cursor:pointer}
+button{margin-top:10px;padding:5px 10px}
+#cert{display:none;margin-top:10px;color:green}
+</style>
+</head>
+<body>
+
+<h2>Mini Learning Platform</h2>
+<div class="lesson" onclick="load('Excel','Which sums A1:A5?',['=SUM(A1:A5)','=ADD(A1:A5)'],0)">Excel Basics</div>
+<div class="lesson" onclick="load('JavaScript','Keyword to declare var?',['var','make'],0)">JavaScript</div>
+
+<h3 id="title">Select a lesson</h3>
+<p id="content"></p>
+<div id="quiz" style="display:none">
+    <p id="question"></p>
+    <div id="options"></div>
+    <button onclick="check()">Submit</button>
+    <div id="result"></div>
+    <div id="cert">🎉 Certificate Earned!</div>
+</div>
+
+<script>
+let ans;
+function load(t,q,opts,a){
+    document.getElementById("title").innerText=t;
+    document.getElementById("content").innerText="Lesson on "+t;
+    document.getElementById("quiz").style.display="block";
+    document.getElementById("question").innerText=q;
+    ans=a;
+    let html="";
+    opts.forEach((o,i)=>html+=`<button onclick='sel(${i})'>${o}</button><br>`);
+    document.getElementById("options").innerHTML=html;
+}
+let chosen=null;
+function sel(i){chosen=i;}
+function check(){
+    if(chosen===null){alert("Select an answer");return;}
+    if(chosen===ans){
+        document.getElementById("result").innerText="✅ Correct!";
+        document.getElementById("cert").style.display="block";
+    } else {
+        document.getElementById("result").innerText="❌ Wrong!";
+    }
+}
+</script>
+
+</body>
+  </html>
+  
